@@ -1,11 +1,11 @@
 {
-    "name": "fredbradley/iginga-wire-dash",
+    "name": "fredbradley/icinga-wire-dash",
     "description": "A Livewire Dashboard for Icinga2 API",
     "keywords": [
         "fredbradley",
-        "iginga-wire-dash"
+        "icinga-wire-dash"
     ],
-    "homepage": "https://github.com/fredbradley/iginga-wire-dash",
+    "homepage": "https://github.com/fredbradley/icinga-wire-dash",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -17,7 +17,10 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
-        "illuminate/support": "^8.0|^9.0"
+        "illuminate/support": "^8.0|^9.0",
+        "saloonphp/laravel-plugin": "^2.0",
+        "saloonphp/laravel-http-sender": "^1.0",
+        "calebporzio/sushi": "^2.0"
     },
     "require-dev": {
         "orchestra/testbench": "^6.0",
@@ -25,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Fredbradley\\IgingaWireDash\\": "src"
+            "FredBradley\\IcingaWireDash\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Fredbradley\\IgingaWireDash\\Tests\\": "tests"
+            "FredBradley\\IcingaWireDash\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -44,10 +47,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Fredbradley\\IgingaWireDash\\IgingaWireDashServiceProvider"
+                "FredBradley\\IcingaWireDash\\IcingaWireDashServiceProvider"
             ],
             "aliases": {
-                "IgingaWireDash": "Fredbradley\\IgingaWireDash\\IgingaWireDashFacade"
+                "IgingaWireDash": "FredBradley\\IcingaWireDash\\IcingaWireDashFacade"
             }
         }
     }

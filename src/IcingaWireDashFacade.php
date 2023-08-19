@@ -1,13 +1,13 @@
 <?php
 
-namespace Fredbradley\IgingaWireDash;
+namespace FredBradley\IcingaWireDash;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Fredbradley\IgingaWireDash\Skeleton\SkeletonClass
+ * @see \FredBradley\IcingaWireDash\Skeleton\SkeletonClass
  */
-class IgingaWireDashFacade extends Facade
+class IcingaWireDashFacade extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -16,6 +16,6 @@ class IgingaWireDashFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'iginga-wire-dash';
+        return 'icinga-wire-dash';
     }
 }
