@@ -3,20 +3,21 @@
 namespace FredBradley\IcingaWireDash\Saloon\Requests;
 
 use FredBradley\IcingaWireDash\Saloon\DataTransferObjects\HostCollection;
+use FredBradley\IcingaWireDash\Saloon\DataTransferObjects\ServiceCollection;
 use Saloon\Contracts\Response;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
-class GetProblemHosts extends Request
+class GetProblemServices extends Request
 {
     protected Method $method = Method::GET;
 
     public function resolveEndpoint(): string
     {
-        return '/objects/hosts?filter=host.state!=ServiceOK';
+        return '/objects/services?filter=service.state!=ServiceOK';
     }
     public function createDtoFromResponse(Response $response): mixed
     {
-        return HostCollection::fromResponse($response);
+        return ServiceCollection::fromResponse($response);
     }
 }

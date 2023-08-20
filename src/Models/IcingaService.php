@@ -4,14 +4,14 @@ namespace FredBradley\IcingaWireDash\Models;
 
 use FredBradley\IcingaWireDash\Saloon\IcingaConnector;
 use FredBradley\IcingaWireDash\Saloon\Requests\GetProblemHosts;
+use FredBradley\IcingaWireDash\Saloon\Requests\GetProblemServices;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Saloon\Exceptions\InvalidResponseClassException;
 use Saloon\Exceptions\PendingRequestException;
 use Sushi\Sushi;
 
-class IcingaHost extends Model
+class IcingaService extends Model
 {
     use Sushi;
 
@@ -26,7 +26,7 @@ class IcingaHost extends Model
     {
         $connector = new IcingaConnector;
 
-        $request = new GetProblemHosts;
+        $request = new GetProblemServices();
         $response = $connector->send($request);
         $results = $response->dto()->data;
         $output = [];
@@ -34,6 +34,7 @@ class IcingaHost extends Model
             $output[] = [
                 'name' => $result->name,
                 'type' => $result->type,
+                'host_name' => $result->host_name,
                 'attrs' => json_encode($result->attrs)
             ];
         }
@@ -42,6 +43,7 @@ class IcingaHost extends Model
 
     protected $fillable = [
         'name',
+        'host_name',
         'type',
         'attrs',
     ];
@@ -54,20 +56,21 @@ class IcingaHost extends Model
     ];
     protected $appends = [
         'test',
-        'ip_address'
+        'host_name'
     ];
 
-    public function services(): HasMany
-    {
-        return $this->hasMany(IcingaService::class, 'host_name', 'name');
-    }
-    protected function ipAddress(): Attribute
+
+    protected function hostName(): Attribute
     {
         return Attribute::make(
             get: function ($value) {
-                return $this->attrs['address'];
+                return $this->attrs['host_name'];
             }
         );
+    }
+    public function host(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(IcingaHost::class, 'host_name', 'name');
     }
 
     protected function getTestAttribute(): string

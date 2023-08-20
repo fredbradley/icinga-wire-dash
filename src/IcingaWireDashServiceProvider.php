@@ -2,7 +2,11 @@
 
 namespace FredBradley\IcingaWireDash;
 
+use FredBradley\IcingaWireDash\Livewire\Dashboard;
+use FredBradley\IcingaWireDash\Livewire\Tiles\HostHeadlines;
+use FredBradley\IcingaWireDash\Livewire\Tiles\ProblemHosts;
 use Illuminate\Support\ServiceProvider;
+use Livewire;
 
 class IcingaWireDashServiceProvider extends ServiceProvider
 {
@@ -15,9 +19,9 @@ class IcingaWireDashServiceProvider extends ServiceProvider
          * Optional methods to load your package assets
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'icinga-wire-dash');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'icinga-wire-dash');
+         $this->loadViewsFrom(__DIR__.'/../resources/views', 'icinga-wire-dash');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
@@ -42,6 +46,13 @@ class IcingaWireDashServiceProvider extends ServiceProvider
             // Registering package commands.
             // $this->commands([]);
         }
+
+        Livewire::component('icinga-dash', Dashboard::class);
+        Livewire::component('host-headlines', HostHeadlines::class);
+        Livewire::component('problem-hosts', ProblemHosts::class);
+
+
+
     }
 
     /**

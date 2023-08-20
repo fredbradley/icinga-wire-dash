@@ -3,11 +3,13 @@
 namespace FredBradley\IcingaWireDash\Maps;
 
 use Carbon\Carbon;
+use Carbon\Exceptions\InvalidFormatException;
 
-class Host
+class Service
 {
     public string $name;
     public string $type;
+    public string $host_name;
     public array $attrs;
 
     protected array $dates = [
@@ -22,16 +24,16 @@ class Host
         'next_check',
         'next_update',
         'previous_state_change',
-        'last_state_up',
-
+        'last_state_ok'
     ];
 
     public function __construct($properties)
     {
         $this->name = $properties['name'];
         $this->type = $properties['type'];
+        $this->host_name = $properties['attrs']['host_name'];
+        $this->last_check_ok = $properties['attrs']['last_state_ok'];
         $this->attrs = $properties['attrs'];
-        $this->last_check_ok = Carbon::parse($properties['attrs']['last_state_up']);
 
     }
 
@@ -45,6 +47,11 @@ class Host
 
     private function parseAsTime(string $value): Carbon
     {
-        return Carbon::parse($value);
+        try {
+            return Carbon::parse($value);
+        } catch (InvalidFormatException $exception) {
+            return Carbon::now()->subYears(10);
+        }
+
     }
 }
