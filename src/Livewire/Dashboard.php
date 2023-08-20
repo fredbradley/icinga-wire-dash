@@ -37,7 +37,7 @@ class Dashboard extends Component
         $services = collect($this->problemServices())->filter(function($service) use ($hosts) {
             return !in_array($service->host_name, $hosts->pluck('name')->toArray());
         })->toArray();
-//        dd($services);
+
         return view('icinga-wire-dash::dashboard', compact('hosts', 'services'));
     }
 }

@@ -9,6 +9,7 @@ class Host
     public string $name;
     public string $type;
     public array $attrs;
+    public array $groups;
 
     protected array $dates = [
         'last_check',
@@ -23,7 +24,6 @@ class Host
         'next_update',
         'previous_state_change',
         'last_state_up',
-
     ];
 
     public function __construct($properties)
@@ -31,6 +31,8 @@ class Host
         $this->name = $properties['name'];
         $this->type = $properties['type'];
         $this->attrs = $properties['attrs'];
+        $this->groups = $properties['attrs']['groups'];
+
         $this->last_check_ok = Carbon::parse($properties['attrs']['last_state_up']);
 
     }
