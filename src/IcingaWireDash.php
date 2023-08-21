@@ -29,6 +29,22 @@ class IcingaWireDash
     /**
      * @throws RequestException
      */
+    public function get(string $url): object
+    {
+        return $this->client->get($url)->throw()->object();
+    }
+
+    /**
+     * @throws RequestException
+     */
+    public function post(string $url, array $data): object
+    {
+        return $this->client->post($url, $data)->throw()->object();
+    }
+
+    /**
+     * @throws RequestException
+     */
     public function getHostProblems(): object
     {
         return $this->client->get("objects/hosts?filter=host.state!=ServiceOK")

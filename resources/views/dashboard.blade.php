@@ -12,7 +12,7 @@
                 </thead>
                 <tbody wire:poll.visible.10s>
 
-                @foreach($hosts as $host)
+                @foreach(collect($hosts)->sortByDesc('last_check_ok') as $host)
                     <tr class="{{ FredBradley\IcingaWireDash\Enums\IcingaState::fromApi($host->attrs['last_check_result']['state'])->cssClass() }}">
 
                         <td>

@@ -3,13 +3,22 @@
 namespace FredBradley\IcingaWireDash\Saloon\Requests;
 
 use FredBradley\IcingaWireDash\Saloon\DataTransferObjects\HostCollection;
+use FredBradley\IcingaWireDash\Saloon\IcingaConnector;
+use Saloon\Contracts\Connector;
 use Saloon\Contracts\Response;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
+use Saloon\Traits\Request\HasConnector;
 
 class GetProblemHosts extends Request
 {
+    use HasConnector;
     protected Method $method = Method::GET;
+
+    protected function resolveConnector(): Connector
+    {
+        return new IcingaConnector();
+    }
 
     public function resolveEndpoint(): string
     {

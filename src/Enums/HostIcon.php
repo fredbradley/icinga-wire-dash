@@ -8,6 +8,7 @@ enum HostIcon:string
     case SWITCHES = 'sitemap';
     case CCTV = 'camera-cctv';
     case VM = 'network';
+    case WEBSITE = 'globe';
 
     public function getIcon(): string
     {
@@ -26,6 +27,12 @@ enum HostIcon:string
         }
         if (in_array('cctv', $groups)) {
             return self::CCTV;
+        }
+        if (in_array('cranleighwebsites', $groups)) {
+            return self::WEBSITE;
+        }
+        if (in_array('linux-servers', $groups)) {
+            return self::VM;
         }
         return json_encode($groups);
     }

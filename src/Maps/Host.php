@@ -10,6 +10,8 @@ class Host
     public string $type;
     public array $attrs;
     public array $groups;
+    public Carbon $last_check_ok;
+    public bool $handled;
 
     protected array $dates = [
         'last_check',
@@ -24,6 +26,7 @@ class Host
         'next_update',
         'previous_state_change',
         'last_state_up',
+        'acknowledgement_expiry'
     ];
 
     public function __construct($properties)
@@ -32,6 +35,7 @@ class Host
         $this->type = $properties['type'];
         $this->attrs = $properties['attrs'];
         $this->groups = $properties['attrs']['groups'];
+        $this->handled = $properties['attrs']['handled'];
 
         $this->last_check_ok = Carbon::parse($properties['attrs']['last_state_up']);
 
@@ -40,12 +44,16 @@ class Host
     public function __get(string $value): mixed
     {
         if (in_array($value, $this->dates)) {
-            return $this->parseAsTime($this->attrs[$value]);
+            try {
+                return $this->parseAsTime($this->attrs[$value]);
+            } catch (\Exception) {
+                return $this->attrs[$value];
+            }
         }
         return $this->attrs[$value];
     }
 
-    private function parseAsTime(string $value): Carbon
+    private function parseAsTime(int $value): Carbon
     {
         return Carbon::parse($value);
     }

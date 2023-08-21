@@ -30,11 +30,21 @@ enum IcingaState
             self::PENDING => 'PENDING',
         };
     }
+    public function asIcon(): string
+    {
+        return match ($this) {
+            self::OK => 'clipboard-check',
+            self::WARNING => 'engine-warning',
+            self::CRITICAL => 'cross-circle',
+            self::UNKNOWN => 'question',
+            self::PENDING => 'clock',
+        };
+    }
     public function cssClass():string {
         return match ($this) {
-            self::OK => 'icinga-success',
-            self::WARNING => 'icinga-warning',
-            self::CRITICAL => 'icinga-danger',
+            self::OK => 'icinga-success bg-success',
+            self::WARNING => 'icinga-warning bg-warning',
+            self::CRITICAL => 'icinga-danger bg-error text-white',
             self::UNKNOWN => 'icinga-secondary',
             self::PENDING => 'icinga-primary',
         };

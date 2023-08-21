@@ -2,41 +2,56 @@
 
 namespace FredBradley\IcingaWireDash\Livewire\Tiles;
 
-use FredBradley\IcingaWireDash\Saloon\IcingaConnector;
+use FredBradley\IcingaWireDash\Maps\Host;
 use FredBradley\IcingaWireDash\Saloon\Requests\GetProblemHosts;
+use Illuminate\Contracts\Support\Renderable;
 use Livewire\Component;
-use Saloon\Exceptions\InvalidResponseClassException;
-use Saloon\Exceptions\PendingRequestException;
 
 class ProblemHosts extends Component
 {
     public string $position;
+    public string $title;
+    public ?bool $handled=null;
 
-    public function mount(string $position): void
+
+
+    public function mount(string $position, bool $handled=null, string $title='Problem Hosts'): void
     {
         $this->position = $position;
+        $this->title = $title;
+        $this->handled = $handled;
     }
 
     /**
-     * @throws \ReflectionException
-     * @throws InvalidResponseClassException
-     * @throws PendingRequestException
      */
-    private function getData()
+    private function getData(): array
     {
-        $connector = new IcingaConnector();
+        $response = (new GetProblemHosts())->send();
 
-        $request = new GetProblemHosts();
-        $response = $connector->send($request);
-
-        return $response->dto()->data;
+        $collection = collect($response->dto()->data);
+/*
+        $collection = $collection->filter(function($host) {
+            return !in_array('access-points', $host->groups);
+        });
+*/
+        if ($this->handled) {
+            $collection = $collection->filter(function (Host $host) {
+                return $host->handled === true;
+            });
+        }
+        if ($this->handled===false) {
+            $collection = $collection->filter(function (Host $host) {
+                return $host->handled === false;
+            });
+        }
+        return $collection->toArray();
     }
 
-    public function render()
+    public function render(): Renderable
     {
         return view('icinga-wire-dash::tiles.problem-hosts', [
             'data' => $this->getData(),
-            'refreshIntervalInSeconds' => config('dashboard.tiles.skeleton.refresh_interval_in_seconds') ?? 60,
+            'refreshIntervalInSeconds' => config('dashboard.tiles.skeleton.refresh_interval_in_seconds') ?? 10,
         ]);
     }
 }
