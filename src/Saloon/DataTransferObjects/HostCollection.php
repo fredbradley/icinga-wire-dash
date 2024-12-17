@@ -3,7 +3,7 @@
 namespace FredBradley\IcingaWireDash\Saloon\DataTransferObjects;
 
 use Illuminate\Support\Collection;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 
 class HostCollection
 {
