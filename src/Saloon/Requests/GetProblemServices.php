@@ -24,7 +24,14 @@ class GetProblemServices extends Request
 
     public function resolveEndpoint(): string
     {
-        return '/objects/services?joins=host&filter=service.state!=ServiceOK';
+        return '/objects/services';
+    }
+    protected function defaultQuery(): array
+    {
+        return [
+            'joins' => 'host',
+            'filter' => 'service.state!=ServiceOK',
+        ];
     }
 
     public function createDtoFromResponse(Response $response): mixed

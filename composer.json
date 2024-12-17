@@ -1,53 +1,52 @@
 {
-    "name": "fredbradley/icinga-wire-dash",
-    "description": "A Livewire Dashboard for Icinga2 API",
-    "keywords": [
-        "fredbradley",
-        "icinga-wire-dash"
-    ],
-    "homepage": "https://github.com/fredbradley/icinga-wire-dash",
-    "license": "MIT",
-    "type": "library",
-    "authors": [
-        {
-            "name": "Fred Bradley",
-            "email": "code@fredbradley.co.uk",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php": "^8.3",
-"saloonphp/laravel-http-sender": "^3.0",
-        "saloonphp/laravel-plugin": "^3.5"
-    },
-    "require-dev": {
-    },
-    "autoload": {
-        "psr-4": {
-            "FredBradley\\IcingaWireDash\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "FredBradley\\IcingaWireDash\\Tests\\": "tests"
-        }
-    },
-    "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "FredBradley\\IcingaWireDash\\IcingaWireDashServiceProvider"
-            ],
-            "aliases": {
-                "IgingaWireDash": "FredBradley\\IcingaWireDash\\IcingaWireDashFacade"
-            }
-        }
+  "name": "fredbradley/icinga-wire-dash",
+  "description": "A Livewire Dashboard for Icinga2 API",
+  "keywords": [
+    "fredbradley",
+    "icinga-wire-dash"
+  ],
+  "homepage": "https://github.com/fredbradley/icinga-wire-dash",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Fred Bradley",
+      "email": "code@fredbradley.co.uk",
+      "role": "Developer"
     }
+  ],
+  "require": {
+    "php": "^8.3",
+    "saloonphp/laravel-http-sender": "^3.0",
+    "saloonphp/laravel-plugin": "^3.5"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "FredBradley\\IcingaWireDash\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FredBradley\\IcingaWireDash\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "FredBradley\\IcingaWireDash\\IcingaWireDashServiceProvider"
+      ],
+      "aliases": {
+        "IgingaWireDash": "FredBradley\\IcingaWireDash\\IcingaWireDashFacade"
+      }
+    }
+  }
 }
