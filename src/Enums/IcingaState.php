@@ -20,6 +20,7 @@ enum IcingaState
             4 => self::PENDING,
         };
     }
+
     public function asText(): string
     {
         return match ($this) {
@@ -30,6 +31,7 @@ enum IcingaState
             self::PENDING => 'PENDING',
         };
     }
+
     public function asIcon(): string
     {
         return match ($this) {
@@ -40,7 +42,9 @@ enum IcingaState
             self::PENDING => 'clock',
         };
     }
-    public function cssClass():string {
+
+    public function cssClass(): string
+    {
         return match ($this) {
             self::OK => 'icinga-success bg-success',
             self::WARNING => 'icinga-warning bg-warning',

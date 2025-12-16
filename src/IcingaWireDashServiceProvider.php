@@ -20,13 +20,13 @@ class IcingaWireDashServiceProvider extends ServiceProvider
          * Optional methods to load your package assets
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'icinga-wire-dash');
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'icinga-wire-dash');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'icinga-wire-dash');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadRoutesFrom(__DIR__ . '/routes.php');
+        $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/config.php' => config_path('icinga-wire-dash.php'),
+                __DIR__.'/../config/config.php' => config_path('icinga-wire-dash.php'),
             ], 'config');
 
             // Publishing the views.
@@ -56,7 +56,6 @@ class IcingaWireDashServiceProvider extends ServiceProvider
         \Spatie\Dashboard\Facades\Dashboard::stylesheet('https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css');
         \Spatie\Dashboard\Facades\Dashboard::inlineStylesheet('.table { border-collapse:separate;border-spacing:1px;width:100%;table-layout:auto;} .table td {padding:5px;}');
 
-
     }
 
     /**
@@ -65,7 +64,7 @@ class IcingaWireDashServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'icinga-wire-dash');
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'icinga-wire-dash');
 
         // Register the main class to use with the facade
         $this->app->singleton('icinga-wire-dash', function () {

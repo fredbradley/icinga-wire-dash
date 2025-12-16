@@ -3,14 +3,9 @@
 namespace FredBradley\IcingaWireDash\Livewire\Tiles;
 
 use FredBradley\IcingaWireDash\Enums\IcingaState;
-use FredBradley\IcingaWireDash\Saloon\IcingaConnector;
-use FredBradley\IcingaWireDash\Saloon\Requests\GetProblemHosts;
 use FredBradley\IcingaWireDash\Saloon\Requests\GetProblemServices;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Support\Collection;
 use Livewire\Component;
-use Saloon\Exceptions\InvalidResponseClassException;
-use Saloon\Exceptions\PendingRequestException;
 
 class ProblemServices extends Component
 {
@@ -21,11 +16,9 @@ class ProblemServices extends Component
         $this->position = $position;
     }
 
-    /**
-     */
     private function getData(): array
     {
-        $response = (new GetProblemServices())->send();
+        $response = (new GetProblemServices)->send();
 
         return $response->dto()->data;
     }

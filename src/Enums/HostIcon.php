@@ -2,7 +2,7 @@
 
 namespace FredBradley\IcingaWireDash\Enums;
 
-enum HostIcon:string
+enum HostIcon: string
 {
     case WIFI = 'wifi';
     case SWITCHES = 'sitemap';
@@ -14,8 +14,10 @@ enum HostIcon:string
     {
         return $this->value;
     }
-    public static function iconFromGroups(array $groups) {
-        $groups = array_map(fn($group) => strtolower($group), $groups);
+
+    public static function iconFromGroups(array $groups)
+    {
+        $groups = array_map(fn ($group) => strtolower($group), $groups);
         if (in_array('vm', $groups)) {
             return self::VM;
         }
@@ -34,6 +36,7 @@ enum HostIcon:string
         if (in_array('linux-servers', $groups)) {
             return self::VM;
         }
+
         return json_encode($groups);
     }
 }

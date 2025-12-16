@@ -9,23 +9,23 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
-    public function mount()
-    {
-    }
+    public function mount() {}
 
     private function problemHosts()
     {
-        $connector = new IcingaConnector();
+        $connector = new IcingaConnector;
 
-        $request = new GetProblemHosts();
+        $request = new GetProblemHosts;
         $response = $connector->send($request);
 
         return $response->dto()->data;
     }
-    private function problemServices() {
-        $connector = new IcingaConnector();
 
-        $request = new GetProblemServices();
+    private function problemServices()
+    {
+        $connector = new IcingaConnector;
+
+        $request = new GetProblemServices;
         $response = $connector->send($request);
 
         return $response->dto()->data;
@@ -34,8 +34,8 @@ class Dashboard extends Component
     public function render()
     {
         $hosts = collect($this->problemHosts());
-        $services = collect($this->problemServices())->filter(function($service) use ($hosts) {
-            return !in_array($service->host_name, $hosts->pluck('name')->toArray());
+        $services = collect($this->problemServices())->filter(function ($service) use ($hosts) {
+            return ! in_array($service->host_name, $hosts->pluck('name')->toArray());
         })->toArray();
 
         return view('icinga-wire-dash::dashboard', compact('hosts', 'services'));

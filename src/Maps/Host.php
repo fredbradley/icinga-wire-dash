@@ -7,10 +7,15 @@ use Carbon\Carbon;
 class Host
 {
     public string $name;
+
     public string $type;
+
     public array $attrs;
+
     public array $groups;
+
     public Carbon $last_check_ok;
+
     public bool $handled;
 
     protected array $dates = [
@@ -26,7 +31,7 @@ class Host
         'next_update',
         'previous_state_change',
         'last_state_up',
-        'acknowledgement_expiry'
+        'acknowledgement_expiry',
     ];
 
     public function __construct($properties)
@@ -50,6 +55,7 @@ class Host
                 return $this->attrs[$value];
             }
         }
+
         return $this->attrs[$value];
     }
 

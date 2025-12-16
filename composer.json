@@ -20,6 +20,7 @@
     "saloonphp/laravel-plugin": "^3.5"
   },
   "require-dev": {
+    "laravel/pint": "^1.26"
   },
   "autoload": {
     "psr-4": {

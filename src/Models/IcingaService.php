@@ -3,7 +3,6 @@
 namespace FredBradley\IcingaWireDash\Models;
 
 use FredBradley\IcingaWireDash\Saloon\IcingaConnector;
-use FredBradley\IcingaWireDash\Saloon\Requests\GetProblemHosts;
 use FredBradley\IcingaWireDash\Saloon\Requests\GetProblemServices;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -26,7 +25,7 @@ class IcingaService extends Model
     {
         $connector = new IcingaConnector;
 
-        $request = new GetProblemServices();
+        $request = new GetProblemServices;
         $response = $connector->send($request);
         $results = $response->dto()->data;
         $output = [];
@@ -35,9 +34,10 @@ class IcingaService extends Model
                 'name' => $result->name,
                 'type' => $result->type,
                 'host_name' => $result->host_name,
-                'attrs' => json_encode($result->attrs)
+                'attrs' => json_encode($result->attrs),
             ];
         }
+
         return $output;
     }
 
@@ -51,14 +51,15 @@ class IcingaService extends Model
     protected $casts = [
         'attrs' => 'array',
     ];
+
     protected $hidden = [
         'attrs',
     ];
+
     protected $appends = [
         'test',
-        'host_name'
+        'host_name',
     ];
-
 
     protected function hostName(): Attribute
     {
@@ -68,6 +69,7 @@ class IcingaService extends Model
             }
         );
     }
+
     public function host(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(IcingaHost::class, 'host_name', 'name');

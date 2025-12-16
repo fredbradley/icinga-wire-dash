@@ -2,13 +2,12 @@
 
 namespace FredBradley\IcingaWireDash\Saloon\Requests;
 
-use FredBradley\IcingaWireDash\Saloon\DataTransferObjects\HostCollection;
 use FredBradley\IcingaWireDash\Saloon\DataTransferObjects\ServiceCollection;
 use FredBradley\IcingaWireDash\Saloon\IcingaConnector;
-use Saloon\Http\Connector;
-use Saloon\Http\Response;
 use Saloon\Enums\Method;
+use Saloon\Http\Connector;
 use Saloon\Http\Request;
+use Saloon\Http\Response;
 use Saloon\Traits\Request\HasConnector;
 
 class GetProblemServices extends Request
@@ -19,13 +18,14 @@ class GetProblemServices extends Request
 
     protected function resolveConnector(): Connector
     {
-        return new IcingaConnector();
+        return new IcingaConnector;
     }
 
     public function resolveEndpoint(): string
     {
         return '/objects/services';
     }
+
     protected function defaultQuery(): array
     {
         return [

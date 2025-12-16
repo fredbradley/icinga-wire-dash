@@ -8,6 +8,7 @@ use Saloon\Http\Response;
 class ServiceCollection
 {
     public array $data;
+
     public function __construct(Collection $dataIn)
     {
         $this->data = $dataIn->mapInto(\FredBradley\IcingaWireDash\Maps\Service::class)->toArray();

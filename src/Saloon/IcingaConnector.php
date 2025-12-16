@@ -10,11 +10,13 @@ use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
 class IcingaConnector extends Connector
 {
     use AcceptsJson, AlwaysThrowOnErrors;
+
     public function __construct()
     {
         $config = config('icinga-wire-dash');
         $this->authenticate(new BasicAuthenticator($config['username'], $config['password']));
     }
+
     public function defaultConfig(): array
     {
         return [
