@@ -32,16 +32,16 @@ class ProblemHosts extends Component
                     return !in_array('access-points', $host->groups);
                 });
         */
-        if ($this->handled) {
-            $collection = $collection->filter(function (Host $host) {
-                return $host->handled === true;
-            });
-        }
-        if ($this->handled === false) {
-            $collection = $collection->filter(function (Host $host) {
-                return $host->handled === false;
-            });
-        }
+//        if ($this->handled) {
+//            $collection = $collection->filter(function (Host $host) {
+//                return $host->handled === true;
+//            });
+//        }
+//        if ($this->handled === false) {
+//            $collection = $collection->filter(function (Host $host) {
+//                return $host->handled === false;
+//            });
+//        }
 
         return $collection->toArray();
     }

@@ -34,8 +34,8 @@ class Dashboard extends Component
     public function render()
     {
         $hosts = collect($this->problemHosts());
-        $services = collect($this->problemServices())->filter(function ($service) use ($hosts) {
-            return ! in_array($service->host_name, $hosts->pluck('name')->toArray());
+        $services = collect($this->problemServices())->reject(function ($service) use ($hosts) {
+            return in_array($service->host_name, $hosts->pluck('name')->toArray());
         })->toArray();
 
         return view('icinga-wire-dash::dashboard', compact('hosts', 'services'));
