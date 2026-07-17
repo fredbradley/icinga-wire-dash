@@ -4,9 +4,9 @@
             class="flex items-center justify-center rounded-full"
             style="background-color: rgba(255, 255, 255, .9)"
         >
-            <div class="text-3xl leading-none -mt-1">
+            <h2 class="font-bold text-gray-800 tracking-tight">
                 {{ $title ?? 'Problem Hosts' }}
-            </div>
+            </h2>
         </div>
         <div wire:poll.{{ $refreshIntervalInSeconds }}s class="divide-y-2">
             <table class="table">

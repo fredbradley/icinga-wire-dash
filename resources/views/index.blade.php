@@ -6,7 +6,7 @@
     <title>IcingaDash</title>
     <style>
         .icinga-warning {
-            background-color: #f6ad55;
+            background-color: #ffff00;
         }
         .icinga-danger {
             background-color: #e53e3e;
