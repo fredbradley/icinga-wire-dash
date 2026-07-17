@@ -33,8 +33,13 @@ class ProblemHosts extends Component
 
     private function getData(): array
     {
-        $response = (new GetProblemHosts)->send();
-
+        try {
+            $response = (new GetProblemHosts)->send();
+        } catch (\Throwable $th) {
+            return [
+                'error' => $th->getMessage(),
+            ];
+        }
         $collection = collect($response->dto()->data);
         /*
                 $collection = $collection->filter(function($host) {
