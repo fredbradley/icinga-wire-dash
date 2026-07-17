@@ -15,9 +15,6 @@ class ProblemHosts extends Component
 
     public ?bool $handled = null;
 
-    public array $data = [];
-    public ?string $lastAttemptedAt = null;
-
     public function mount(string $position, ?bool $handled = null, string $title = 'Problem Hosts'): void
     {
         $this->position = $position;
@@ -25,38 +22,26 @@ class ProblemHosts extends Component
         $this->handled = $handled;
     }
 
-    public function refreshData(): void
-    {
-        $this->data = $this->getData();
-        $this->lastAttemptedAt = now()->toIso8601String();
-    }
-
     private function getData(): array
     {
-        try {
-            $response = (new GetProblemHosts)->send();
-        } catch (\Exception $e) {
-            return [
-                'error' => $e->getMessage(),
-            ];
-        }
-        $collection = collect($response->dto()->data);
+        $response = (new GetProblemHosts)->send();
 
+        $collection = collect($response->dto()->data);
         /*
                 $collection = $collection->filter(function($host) {
                     return !in_array('access-points', $host->groups);
                 });
         */
-        //        if ($this->handled) {
-        //            $collection = $collection->filter(function (Host $host) {
-        //                return $host->handled === true;
-        //            });
-        //        }
-        //        if ($this->handled === false) {
-        //            $collection = $collection->filter(function (Host $host) {
-        //                return $host->handled === false;
-        //            });
-        //        }
+//        if ($this->handled) {
+//            $collection = $collection->filter(function (Host $host) {
+//                return $host->handled === true;
+//            });
+//        }
+//        if ($this->handled === false) {
+//            $collection = $collection->filter(function (Host $host) {
+//                return $host->handled === false;
+//            });
+//        }
 
         return $collection->toArray();
     }
@@ -64,8 +49,7 @@ class ProblemHosts extends Component
     public function render(): Renderable
     {
         return view('icinga-wire-dash::tiles.problem-hosts', [
-            'data' => $this->data,
-            'lastAttemptedAt' => $this->lastAttemptedAt ?? 'Never',
+            'data' => $this->getData(),
             'refreshIntervalInSeconds' => config('dashboard.tiles.skeleton.refresh_interval_in_seconds') ?? 10,
         ]);
     }
